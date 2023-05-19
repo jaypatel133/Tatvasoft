@@ -28,7 +28,7 @@ function Header(props) {
     const navigate = useNavigate();
 
     return (
-        <div  >
+        <>
             <ul className='nav'>
                 <div>
                     <img height={'40px'}
@@ -42,8 +42,7 @@ function Header(props) {
                 </div>
             </ul>
             <SearchBar/>
-            <Outlet/>
-        </div>
+        </>
     );
 }
 

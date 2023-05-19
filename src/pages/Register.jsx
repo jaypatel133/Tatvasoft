@@ -27,7 +27,7 @@ function Register(props) {
                 Login or Create an Account
             </div>
 
-            <div style={{display:"block",marginTop:"50px",marginLeft:"6rem",marginRight:"6rem"}}>
+            <div style={{display:"block",marginTop:"50px",marginBottom:"60px",marginLeft:"6rem",marginRight:"6rem"}}>
                 <h2 style={{fontSize:"20px",fontWeight:"500",marginBottom:"20px"}}>Personal Information</h2>
                 <h4 style={{fontSize:"15px",fontWeight:"300",marginTop:"20px",marginBottom:"20px"}}>Please enter the following Information to create your Account</h4>
                 <div style={{width:"49%",height:"80px",display:"inline-block"}}>

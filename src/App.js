@@ -1,15 +1,14 @@
 import { BrowserRouter ,Routes, Route} from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Header from './components/Header';
-
+import MainPage from './pages/MainPage';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-        <Route exact path="/" element={<Header/>} >
+        <Route exact path="/" element={<MainPage/>} >
           <Route index element={<Login/>} />
           <Route exact path="login" element={<Login/>} />
           <Route exact path="register" element={<Register/>} />
