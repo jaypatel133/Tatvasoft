@@ -1,0 +1,21 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+li{
+    list-style: none;
+    display: inline;
+}
+div{
+    display: inline;
+}
+.nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 4rem;
+    border-top: 0.4rem solid #f14d54;
+}
+.nav_b{
+    border-color: #d25b5f;
+}
