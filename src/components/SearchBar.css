@@ -1,0 +1,15 @@
+.searchBar{
+    display: flex;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0e0e0;
+}
+.se{
+   height: 40px;
+   padding-left: 10px;
+   color: rgb(118, 118, 118);
+   width: 422px;
+   border-radius: 5px;
+   border-color:  rgb(118, 118, 118);
+}

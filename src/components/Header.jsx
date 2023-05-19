@@ -3,6 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import './Header.css'
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
+import SearchBar from './SearchBar';
 
 const styles = {
     nav_b:{
@@ -34,6 +35,7 @@ function Header(props) {
                     <li className='nav_b'><Button sx={styles.nav_b} variant="outlined" className='nav_b' size="small" >Card</Button></li>
                 </div>
             </ul>
+            <SearchBar/>
             <Outlet/>
         </div>
     );
