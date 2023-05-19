@@ -1,0 +1,79 @@
+.editProductTitle{
+    display: block;
+    text-align: center;
+    font-weight: 500;
+    font-size: 32px;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+.editProduct{
+    display: block;
+    margin: 0 6rem;
+}
+.inpTitle{
+    display: block;
+    margin-bottom: 15px;
+}
+.inpBox{
+    width: 100%;
+    height: 40px;
+    margin-bottom: 40px;
+    padding-left: 10px;
+}
+.flieInp{
+    display: block;
+    background-color: aquamarine;
+    height: 40px;
+    width: 100%;
+}
+.flieInpBtn{
+    display: inline-block;
+    background-color: #f14d54;
+    height: 40px;
+    width: 100px;
+    padding: 8px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+}
+
+
+
+.file-upload .file-upload-select {
+	display: block;
+	color: #000000;
+	cursor: pointer;
+	text-align: left;
+	background: #ffffff;
+	overflow: hidden;
+	position: relative;
+	border-radius: 6px;
+}
+.file-upload .file-upload-select .file-select-button {
+    color: #ffffff;
+    font-weight: 500;
+	background: #f14d54;
+	padding: 10px;
+	display: inline-block;
+}
+.file-upload .file-upload-select .file-select-name {
+    border: 1px solid #555555;
+    border-left: 0px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+	display: inline-block;
+	padding: 9.25px;
+}
+/* .file-upload .file-upload-select:hover .file-select-button {
+	background: #324759;
+	color: #ffffff;
+	transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+} */
+.file-upload .file-upload-select input[type="file"] {
+	display: none;
+}
