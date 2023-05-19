@@ -1,0 +1,19 @@
+.redir{
+    display: block;
+    font-size: 18px;
+    font-family: Roboto;
+    margin: 50px 0;
+    text-align: center;
+    color: #414141;
+}
+.redir span{
+    color: #f14d54;
+}
+.loginTitle{
+    display: block;
+    font-size: 32px;
+    font-family: Roboto;
+    margin: 0 0 25px 0;
+    text-align: center;
+}
+
