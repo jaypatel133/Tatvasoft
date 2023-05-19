@@ -1,6 +1,7 @@
 import React from 'react';
 import './Login.css';
 import {Button} from '@mui/material';
+import { useNavigate } from "react-router-dom";
 
 const styles = {
     can_b:{
@@ -16,6 +17,7 @@ const styles = {
   };
 
 function Login(props) {
+    const navigate = useNavigate();
     return (
         <div>
             <div className='redir'>
@@ -36,7 +38,7 @@ function Login(props) {
                         <li>A scelerisque purus semper eget duis at tellus at urna</li>
                     </ul>
 
-                    <Button sx={styles.can_b} variant="contained" className='nav_b' >Create an Account </Button>
+                    <Button sx={styles.can_b} variant="contained" className='nav_b' onClick={()=>{navigate("/register")}}>Create an Account </Button>
                 </div>
                 <div className='loginForm'>
                     <samp className='heading'>Registered Customer</samp>

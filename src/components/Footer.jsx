@@ -6,7 +6,7 @@ function Footer(props) {
     return (
         <div className='footer'>
             <div className='footerImg'>
-                <img height={'45px'} src={process.env.PUBLIC_URL + "logo.png"} /><br/>
+                <img height={'35px'} src={process.env.PUBLIC_URL + "logo.png"} /><br/>
             </div>
             <div className='footerText'>
                 ©Tatvassoft.com  All Rights Reserved
