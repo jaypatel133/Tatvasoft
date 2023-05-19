@@ -8,9 +8,14 @@ import SearchBar from './SearchBar';
 const styles = {
     nav_b:{
         "&.MuiButton-root": {
-            border: "1px solid #f14d54"
+            border: "1px solid rgb(65,65,65)"
           },
           "&.MuiButton-outlined": {
+            color:"rgb(65,65,65)"
+          }
+    },
+    nav_a:{
+          "&.MuiButton-secondary": {
             color: "#f14d54"
           }
     }
@@ -30,8 +35,9 @@ function Header(props) {
                     src={process.env.PUBLIC_URL + "logo.png"} />
                 </div>
                 <div>    
-                    <li className='nav_b'><Button sx={styles.nav_b} variant="outlined" className='nav_b' size="small" onClick={()=>{navigate("/login")}}>Login</Button></li>
-                    <li className='nav_b'><Button sx={styles.nav_b} variant="outlined" className='nav_b' size="small" onClick={()=>{navigate("/register")}}>Register</Button></li>
+                    <li className='nav_b'><Button sx={styles.nav_a} variant="secondary" className='nav_b' size="small" onClick={()=>{navigate("/login")}}>Login</Button></li>
+                    <li>|</li>
+                    <li className='nav_b'><Button sx={styles.nav_a} variant="secondary" className='nav_b' size="small" onClick={()=>{navigate("/register")}}>Register</Button></li>
                     <li className='nav_b'><Button sx={styles.nav_b} variant="outlined" className='nav_b' size="small" >Card</Button></li>
                 </div>
             </ul>
