@@ -35,10 +35,10 @@ function Header(props) {
                     src={process.env.PUBLIC_URL + "logo.png"} />
                 </div>
                 <div>    
-                    <li className='nav_b'><Button sx={styles.nav_a} variant="secondary" className='nav_b' size="small" onClick={()=>{navigate("/login")}}>Login</Button></li>
-                    <li>|</li>
-                    <li className='nav_b'><Button sx={styles.nav_a} variant="secondary" className='nav_b' size="small" onClick={()=>{navigate("/register")}}>Register</Button></li>
-                    <li className='nav_b'><Button sx={styles.nav_b} variant="outlined" className='nav_b' size="small" >Card</Button></li>
+                    <li style={{listStyle:"none",display:"inline"}} className='nav_b'><Button sx={styles.nav_a} variant="secondary" className='nav_b' size="small" onClick={()=>{navigate("/login")}}>Login</Button></li>
+                    <li style={{listStyle:"none",display:"inline"}}>|</li>
+                    <li style={{listStyle:"none",display:"inline"}} className='nav_b'><Button sx={styles.nav_a} variant="secondary" className='nav_b' size="small" onClick={()=>{navigate("/register")}}>Register</Button></li>
+                    <li style={{listStyle:"none",display:"inline"}} className='nav_b'><Button sx={styles.nav_b} variant="outlined" className='nav_b' size="small" >Card</Button></li>
                 </div>
             </ul>
             <SearchBar/>
