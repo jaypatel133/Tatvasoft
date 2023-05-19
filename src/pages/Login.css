@@ -1,0 +1,65 @@
+.redir{
+    display: block;
+    font-size: 18px;
+    font-family: Roboto;
+    margin: 50px 0;
+    text-align: center;
+    color: #414141;
+}
+.redir span{
+    color: #f14d54;
+}
+.loginTitle{
+    display: block;
+    font-size: 32px;
+    font-family: Roboto;
+    margin: 0 0 25px 0;
+    text-align: center;
+}
+
+.createAccount{
+    display: inline-block;
+    /* background-color: #f14d54; */
+    width: 50%;
+    margin-top: 50px;
+    overflow: hidden;
+}
+.loginForm{
+    display: inline-block;
+    /* background-color: aqua; */
+    width: 50%;
+    margin-top: 50px;
+    overflow: hidden;
+
+}
+.mainLoginDiv{
+    margin: 25px 6rem 3rem;
+    display: block;
+    align-items: start;
+}
+.heading{
+    display: block;
+    margin-bottom: 40px;
+    font-size: 20px;
+    color: #414141;
+}
+.subHeading{
+    display: block;
+    font-size: 15px;
+    color: #838383;
+    margin:20px 0 ;
+}
+.regList{
+    margin-left: 30px;
+    margin-bottom: 165px;
+}
+.inpTitle{
+    display: block;
+    margin-bottom: 15px;
+}
+.inpBox{
+    width: 100%;
+    height: 40px;
+    margin-bottom: 40px;
+    padding-left: 10px;
+}
