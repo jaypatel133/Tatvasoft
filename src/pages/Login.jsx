@@ -1,4 +1,5 @@
 import React from 'react';
+import { Formik } from 'formik';
 import './Login.css';
 import {Button} from '@mui/material';
 import { useNavigate } from "react-router-dom";
@@ -43,12 +44,72 @@ function Login(props) {
                 <div className='loginForm'>
                     <samp className='heading'>Registered Customer</samp>
                     <samp className='subHeading'>Lorem ipsum dolor sit amet, consectetur adipiscing elit</samp>
-                    <samp className='inpTitle'>Email Address:</samp>
-                    <input className='inpBox'  placeholder='email'/>
-                    <samp className='inpTitle'>Email Address:</samp>
-                    <input className='inpBox' placeholder='email'/>
 
-                    <Button sx={styles.can_b} variant="contained" className='nav_b' >Login</Button>
+                    <Formik
+                        initialValues={{ email: '', password: '' }}
+                        validate={values => {
+                            const errors = {};
+                            if (!values.email) {
+                            errors.email = 'Email Required';
+                            } else if (
+                            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                            ) {
+                            errors.email = 'Invalid email address';
+                            }
+
+                            if (!values.password) {
+                            errors.password = 'Password Required';
+                            }
+
+                            return errors;
+                        }}
+                        onSubmit={(values, { setSubmitting }) => {
+                            setTimeout(() => {
+                            alert(JSON.stringify(values, null, 2));
+                            setSubmitting(false);
+                            }, 400);
+                        }}
+                        >
+                        {({
+                            values,
+                            errors,
+                            touched,
+                            handleChange,
+                            handleBlur,
+                            handleSubmit,
+                            isSubmitting,
+                            /* and other goodies */
+                        }) => (
+                            <form onSubmit={handleSubmit}>
+                            <div style={{display:"block",marginBottom:"40px"}}>
+                                <samp className='inpTitle'>Email Address:</samp>
+                                <input type="email"
+                                    name="email"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.email} className='inpBox'style={{marginBottom:"0px"}} placeholder='email'/>
+                                <div className='errorMsg'>
+                                    {errors.email && touched.email && errors.email}
+                                </div>
+                            </div> 
+                            <div style={{display:"block",marginBottom:"40px"}}>
+                                <samp className='inpTitle'>Password:</samp>
+                                <input type="password"
+                                    name="password"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.password} className='inpBox' style={{marginBottom:"0px"}} placeholder='email'/>
+                                <div className='errorMsg'>
+                                    {errors.password && touched.password && errors.password}
+                                </div>
+                            </div>
+
+                            <Button type="submit" sx={styles.can_b} variant="contained" className='nav_b' >Login</Button>
+                            </form>
+                        )}
+                        </Formik>
+
+
                 </div>
             </div>
         </div>
