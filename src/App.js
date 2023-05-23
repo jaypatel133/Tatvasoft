@@ -3,6 +3,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import MainPage from './pages/MainPage';
 import EditProduct from './pages/EditProduct';
+import CartPage from './pages/CartPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route exact path="login" element={<Login/>} />
           <Route exact path="register" element={<Register/>} />
           <Route exact path="editProduct" element={<EditProduct/>} />
+          <Route exact path="cartPage" element={<CartPage/>} />
         </Route>
          
         </Routes>
