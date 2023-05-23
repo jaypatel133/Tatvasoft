@@ -26,9 +26,10 @@
     height: 40px;
 }
 .inpType1{
+    float:left; 
     width: 49%;
     height: 80px;
-    display: inline-block;
+    margin-bottom: 40px;
 }
 .m2p{
     margin-left: 2%;
@@ -47,5 +48,11 @@
     font-weight: 300;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+.errorMsgReg{
+    display: block;
+    height: 80px;
+    width: 100%;
+    background-color: aqua;
 }
 
