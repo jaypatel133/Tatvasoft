@@ -4,6 +4,7 @@ import './Header.css'
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 import SearchBar from './SearchBar';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const styles = {
     nav_b:{
@@ -38,7 +39,7 @@ function Header(props) {
                     <li style={{listStyle:"none",display:"inline"}} className='nav_b'><Button sx={styles.nav_a} variant="secondary" className='nav_b' size="small" onClick={()=>{navigate("/login")}}>Login</Button></li>
                     <li style={{listStyle:"none",display:"inline"}}>|</li>
                     <li style={{listStyle:"none",display:"inline"}} className='nav_b'><Button sx={styles.nav_a} variant="secondary" className='nav_b' size="small" onClick={()=>{navigate("/register")}}>Register</Button></li>
-                    <li style={{listStyle:"none",display:"inline"}} className='nav_b'><Button sx={styles.nav_b} variant="outlined" className='nav_b' size="small" >Card</Button></li>
+                    <li style={{listStyle:"none",display:"inline"}} className='nav_b'><Button sx={styles.nav_b} variant="outlined" className='nav_b' size="small" onClick={()=>{navigate("/cartPage")}}><ShoppingCartIcon style={{color:'red'}} size="small"/> 0 Card</Button></li>
                 </div>
             </ul>
             <SearchBar/>
