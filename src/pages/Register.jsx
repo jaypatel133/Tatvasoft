@@ -27,28 +27,28 @@ function Register(props) {
                 Login or Create an Account
             </div>
 
-            <div style={{display:"block",marginTop:"50px",marginBottom:"60px",marginLeft:"6rem",marginRight:"6rem"}}>
-                <h2 style={{fontSize:"20px",fontWeight:"500",marginBottom:"20px"}}>Personal Information</h2>
-                <h4 style={{fontSize:"15px",fontWeight:"300",marginTop:"20px",marginBottom:"20px"}}>Please enter the following Information to create your Account</h4>
-                <div style={{width:"49%",height:"80px",display:"inline-block"}}>
-                    <samp style={{display:"block"}}>Email Address:</samp>
-                    <input style={{width:"100%",height:"40px"}} placeholder='email'/>
+            <div className='regPage'>
+                <h2 className='regPageTitle'>Personal Information</h2>
+                <h4 className='regPageSubTitle'>Please enter the following Information to create your Account</h4>
+                <div className='inpType1'>
+                    <samp className='inpTitle'>First Name:</samp>
+                    <input className='inpBox'/>
                 </div>
-                <div style={{width:"49%",height:"80px",display:"inline-block",marginLeft:"2%"}}>
-                    <samp style={{display:"block"}}>Email Address:</samp>
-                    <input style={{width:"100%",height:"40px"}} placeholder='email'/>
+                <div className='inpType1 m2p'>
+                    <samp className='inpTitle'>Last Name:</samp>
+                    <input className='inpBox'/>
                 </div>
-                <samp style={{display:"block"}}>Email Address:</samp>
-                <input style={{width:"100%",height:"40px"}} placeholder='email'/>
+                <samp className='inpTitle'>Email Address:</samp>
+                <input className='inpBox'/>
                 
-                <h2 style={{fontSize:"20px",fontWeight:"500",marginTop:"70px",marginBottom:"20px"}}>Login Information</h2>
-                <div style={{width:"49%",height:"80px",display:"inline-block"}}>
-                    <samp style={{display:"block"}}>Email Address:</samp>
-                    <input style={{width:"100%",height:"40px"}} placeholder='email'/>
+                <h2 className='regPageTitle' style={{marginTop:"70px"}}>Login Information</h2>
+                <div className='inpType1'>
+                    <samp className='inpTitle'>Password:</samp>
+                    <input className='inpBox'/>
                 </div>
-                <div style={{width:"49%",height:"80px",display:"inline-block",marginLeft:"2%"}}>
-                    <samp style={{display:"block"}}>Email Address:</samp>
-                    <input style={{width:"100%",height:"40px"}} placeholder='email'/>
+                <div className='inpType1 m2p'>
+                    <samp className='inpTitle'>Conferm Password:</samp>
+                    <input className='inpBox'/>
                 </div>
 
                 <Button sx={styles.can_b} variant="contained" className='nav_b' >Register </Button>
