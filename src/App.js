@@ -4,10 +4,13 @@ import Register from './pages/Register';
 import MainPage from './pages/MainPage';
 import EditProduct from './pages/EditProduct';
 import CartPage from './pages/CartPage';
+import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <div className="App">
+    <ToastContainer/>
       <BrowserRouter>
         <Routes>
         <Route exact path="/" element={<MainPage/>} >

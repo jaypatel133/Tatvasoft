@@ -1,0 +1,9 @@
+import request from "./request";
+const base= '/api/user'
+export function getUserRole(){
+    return request.get(base+'/roles');
+}
+
+export function addUser(data){
+    return request.post('/product', JSON.stringify(data));
+}
