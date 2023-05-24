@@ -71,17 +71,17 @@ useEffect(()=>{
               {groupedOptions.length > 0 ? (
                 <Listbox {...getListboxProps()}>
                   {groupedOptions.map((option, index) => (
-                    <div {...getOptionProps({ option, index })}>
+                    <div {...getOptionProps({ option, index })} style={{display:"block",margin:"15px"}}>
                     <div style={{display:"block",width:"100%"}}>
-                      <div style={{display:"inline-block",width:"75%"}}>{option.title}</div>
-                      <div style={{display:"inline-block",textAlign:"right",width:"25%"}}>{option.year}</div>
+                      <div style={{display:"inline-block",width:"75%",fontSize:"17px",fontWeight:"500"}}>{option.title}</div>
+                      <div style={{display:"inline-block",textAlign:"right",width:"25%" ,fontSize:"17px",fontWeight:"500"}}>{option.year}</div>
                     </div>
                     <div style={{display:"block",width:"100%"}}>
-                      <div style={{display:"inline-block",width:"75%"}}>category</div>
-                      <div style={{display:"inline-block",textAlign:"right",width:"25%"}}>Add to cart</div>
+                      <div style={{display:"inline-block",width:"75%",fontSize:"14px",fontWeight:"300",color:"gray"}}>category</div>
+                      <div style={{display:"inline-block",textAlign:"right",width:"25%",fontSize:"15px",fontWeight:"300",color:"#f14d54"}}>Add to cart</div>
                     </div>
-                    <li  style={{display:"block",width:"300px"}}>Description</li>
-                    <hr/>
+                    <li  style={{display:"block",width:"300px",fontSize:"14px",fontWeight:"300",color:"gray"}}>Description</li>
+                    
                     </div>
                   ))}
                 </Listbox>
