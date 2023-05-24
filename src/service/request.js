@@ -15,7 +15,13 @@ const request = axios.create({
      }, 
      function (error) {
           let res = error.response;
-          toast.error("Somthing went wrong. Please try again!");
+          if(res?.data?.code === 409)
+          {
+              toast.error("already exist");
+          }else
+          {
+               toast.error("Somthing went wrong. Please try again!");
+          }
           return Promise.reject(error);
      }
    );

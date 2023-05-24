@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import './Register.css';
 import {Button} from '@mui/material';
+import {getUserRole ,addUser} from '../service/user.service';
+import { toast } from 'react-toastify';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import { Toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 const styles = {
     can_b:{
@@ -12,12 +18,37 @@ const styles = {
           "&.MuiButton-contained": {
             color: "white",
           }
+    },
+    select:
+    {
+        width: "100%",
+        height:"40px",
+        '.MuiOutlinedInput-notchedOutline': {
+            borderColor: '#6f6f6f',
+        },
+        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'black',
+        },
     }
         
   };
-
+  
 
 function Register(props) {
+
+    const [roles,setRoles] = new useState();
+    const navigate = useNavigate();
+    
+    useEffect(()=>{
+        getUserRole().then(res=>{
+            setRoles(res.data.result.map(obj => {
+                return <MenuItem value={obj.id}>{obj.name}</MenuItem>
+            }))
+        }).catch((err)=>{
+            console.log(err)
+        })
+    },[]);
+
     return (
         <div>
             <div className='redir'>
@@ -28,16 +59,8 @@ function Register(props) {
                 Login or Create an Account
             </div>
 
-
-
-
-
-
-
-
-
             <Formik
-                        initialValues={{firstName: '',lastName:'', email: '', password: '', conPassword: '',}}
+                        initialValues={{firstName: '',lastName:'', email: '',roleId:'', password: '', conPassword: '',}}
                         validate={values => {
                             const errors = {};
                             //name validation
@@ -47,8 +70,10 @@ function Register(props) {
                             if (!values.lastName) {
                             errors.lastName = 'Last Name Required';
                             }
-
-
+                            //role validation
+                            if (!values.roleId) {
+                            errors.roleId = 'Role Required';
+                            }
                             //email validetion
                             if (!values.email) {
                             errors.email = 'Email Required';
@@ -73,10 +98,14 @@ function Register(props) {
                             return errors;
                         }}
                         onSubmit={(values, { setSubmitting }) => {
-                            setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
-                            setSubmitting(false);
-                            }, 400);
+                            const temp = JSON.parse(JSON.stringify(values));
+                            delete temp.conPassword;
+                            addUser(temp).then(res=>{
+                                navigate('/login');
+                                console.log(res);
+                            }).catch((err)=>{
+                                console.log(err)
+                            })
                         }}
                         >
                         {({
@@ -122,19 +151,36 @@ function Register(props) {
                                         </div>
                                     </div>
                                     <samp style={{display:"block",height:"35px"}}/>
-                                    <samp className='inpTitle'>Email Address:</samp>
-                                    <input className='inpBox'
-                                        type="email"
-                                        name="email"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        value={values.email}
-                                        style={{marginBottom:"0px"}}
-                                    />
-                                    <div className='errorMsg'>
-                                        {errors.email && touched.email && errors.email}
-                                    </div>
                                     
+                                    <div className='inpType1'>
+                                        <samp className='inpTitle'>Email Address:</samp>
+                                        <input className='inpBox'
+                                           type="email"
+                                            name="email"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.email}
+                                            style={{marginBottom:"0px"}}
+                                        />
+                                        <div className='errorMsg'>
+                                            {errors.email && touched.email && errors.email}
+                                        </div>
+                                    </div>
+                                    <div className='inpType1 m2p'>
+                                        <samp className='inpTitle'>Role:</samp>
+                                        <Select 
+                                            name="roleId"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.roleId}
+                                            sx={styles.select}>
+                                            {roles}
+                                        </Select>
+                                        <div className='errorMsg' >
+                                            {errors.roleId && touched.roleId && errors.roleId}
+                                        </div>
+                                    </div>
+
                                     <h2 className='regPageTitle' style={{marginTop:"70px"}}>Login Information</h2>
                                     <div className='inpType1'>
                                         <samp className='inpTitle'>Password:</samp>
@@ -171,16 +217,6 @@ function Register(props) {
                             </form>
                         )}
                         </Formik>
-
-
-
-
-
-
-
-
-
-
             
         </div>
     );
