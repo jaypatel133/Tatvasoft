@@ -10,18 +10,10 @@ const request = axios.create({
    });
 
    request.interceptors.response.use(
-     function (response) {
+     function (response) {  
           return response
      }, 
      function (error) {
-          let res = error.response;
-          if(res?.data?.code === 409)
-          {
-              toast.error("already exist");
-          }else
-          {
-               toast.error("Somthing went wrong. Please try again!");
-          }
           return Promise.reject(error);
      }
    );

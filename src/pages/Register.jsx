@@ -101,10 +101,11 @@ function Register(props) {
                             const temp = JSON.parse(JSON.stringify(values));
                             delete temp.conPassword;
                             addUser(temp).then(res=>{
-                                navigate('/login');
-                                console.log(res);
-                            }).catch((err)=>{
-                                console.log(err)
+                                if(res?.data?.code === 200){
+                                    toast.success("Register Successful")
+                                    navigate('/login');
+                                    console.log(res);
+                                }
                             })
                         }}
                         >
