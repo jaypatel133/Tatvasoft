@@ -61,9 +61,6 @@ function SearchBar(props) {
 
   const[focus,SetFocus] = new useState(false);
 
-useEffect(()=>{
-  console.log(focus)
-},[focus])
     return (
         <div className='searchBar' >
           <div  {...getRootProps()}>

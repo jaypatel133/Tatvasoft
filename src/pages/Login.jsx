@@ -3,6 +3,10 @@ import { Formik } from 'formik';
 import './Login.css';
 import {Button} from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import {LoginUser} from '../service/auth.service';
+import { toast } from "react-toastify";
+
+
 
 const styles = {
     can_b:{
@@ -64,10 +68,14 @@ function Login(props) {
                             return errors;
                         }}
                         onSubmit={(values, { setSubmitting }) => {
-                            setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
-                            setSubmitting(false);
-                            }, 400);
+                            LoginUser(values).then(res=>{
+                                if(res?.data?.code === 200)
+                                {
+                                    toast.success("Login Successful")
+                                    console.log(res);
+                                } 
+                            })
+
                         }}
                         >
                         {({
@@ -87,7 +95,7 @@ function Login(props) {
                                     name="email"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.email} className='inpBox'style={{marginBottom:"0px"}} placeholder='email'/>
+                                    value={values.email} className='inpBox'style={{marginBottom:"0px"}} />
                                 <div className='errorMsg'>
                                     {errors.email && touched.email && errors.email}
                                 </div>
@@ -98,7 +106,7 @@ function Login(props) {
                                     name="password"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.password} className='inpBox' style={{marginBottom:"0px"}} placeholder='email'/>
+                                    value={values.password} className='inpBox' style={{marginBottom:"0px"}} />
                                 <div className='errorMsg'>
                                     {errors.password && touched.password && errors.password}
                                 </div>
