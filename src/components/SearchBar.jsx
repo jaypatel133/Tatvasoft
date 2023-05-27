@@ -4,6 +4,7 @@ import {Search} from '@mui/icons-material';
 import './SearchBar.css'
 import useAutocomplete from '@mui/base/useAutocomplete';
 import { styled } from '@mui/system';
+import {searchBook,getAllBook} from '../service/book.service';
 
 const Listbox = styled('ul')(({ theme }) => ({
   width: "422px",
@@ -45,20 +46,41 @@ const styles = {
 
 function SearchBar(props) {
 
+  const [books,setBooks] = useState([]);
+  
+  useEffect(()=>{
+    getAllBook().then(res=>{
+      setBooks(res.data.result);
+      console.log(res.data.result)
+    })
+  },[])
+
   const {
     getRootProps,
     getInputProps,
     getListboxProps,
     getOptionProps,
+    getClearProps,
     groupedOptions,
+    inputValue,
   } = useAutocomplete({
     id: 'use-autocomplete-demo',
-    options: top10Films,
-    getOptionLabel: (option) => option.title,
+    options: books,
+    getOptionLabel: (option) => option.name,
     onOpen: () => SetFocus(true),
-    onClose:()=>SetFocus(false)
+    onClose:()=>SetFocus(false),
+    // onInputChange:(event,value)=>{
+    //   if(value!=='')
+    //   {
+    //     searchBook(value).then((res)=>{
+    //       if(value !== '')
+    //       {
+    //         console.log(res?.data?.result)
+    //       }
+    //     })
+    //   }   
+    // }
   });
-
   const[focus,SetFocus] = new useState(false);
 
     return (
@@ -70,14 +92,16 @@ function SearchBar(props) {
                   {groupedOptions.map((option, index) => (
                     <div {...getOptionProps({ option, index })} style={{display:"block",margin:"15px"}}>
                     <div style={{display:"block",width:"100%"}}>
-                      <div style={{display:"inline-block",width:"75%",fontSize:"17px",fontWeight:"500"}}>{option.title}</div>
-                      <div style={{display:"inline-block",textAlign:"right",width:"25%" ,fontSize:"17px",fontWeight:"500"}}>{option.year}</div>
+                      <div style={{display:"inline-block",width:"75%",fontSize:"17px",fontWeight:"500"}}>{option.name}</div>
+                      <div style={{display:"inline-block",textAlign:"right",width:"25%" ,fontSize:"17px",fontWeight:"500"}}>{option.price}</div>
                     </div>
                     <div style={{display:"block",width:"100%"}}>
-                      <div style={{display:"inline-block",width:"75%",fontSize:"14px",fontWeight:"300",color:"gray"}}>category</div>
+                      <div style={{display:"inline-block",width:"75%",fontSize:"14px",fontWeight:"300",color:"gray"}}>
+                      {option.description.length > 45 ? option.description.slice(0,43)+'...' : option.description }
+                      </div>
                       <div style={{display:"inline-block",textAlign:"right",width:"25%",fontSize:"15px",fontWeight:"300",color:"#f14d54"}}>Add to cart</div>
                     </div>
-                    <li  style={{display:"block",width:"300px",fontSize:"14px",fontWeight:"300",color:"gray"}}>Description</li>
+                    {/* <li  style={{display:"block",width:"300px",fontSize:"14px",fontWeight:"300",color:"gray"}}>Description</li> */}
                     
                     </div>
                   ))}
@@ -86,7 +110,11 @@ function SearchBar(props) {
               
           </div>
            
-          <Button sx={styles.sea_b} variant="contained" className='nav_b' startIcon={<Search/>}>Search</Button>
+          <Button sx={styles.sea_b} variant="contained" className='nav_b' onClick={()=>{
+            searchBook(inputValue).then((res)=>{
+              console.log(res);
+            })
+          }} startIcon={<Search/>}>Search</Button>
           <Button sx={styles.can_b} variant="contained" className='nav_b' >Cancel </Button>
         </div>
     );

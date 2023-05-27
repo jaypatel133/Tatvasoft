@@ -97,8 +97,8 @@ function Register(props) {
 
                             return errors;
                         }}
-                        onSubmit={(values, { setSubmitting }) => {
-                            const temp = JSON.parse(JSON.stringify(values));
+                        onSubmit={(formValues, { setSubmitting }) => {
+                            const temp = JSON.parse(JSON.stringify(formValues));
                             delete temp.conPassword;
                             addUser(temp).then(res=>{
                                 if(res?.data?.code === 200){
