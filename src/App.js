@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import MainPage from './pages/MainPage';
 import EditProduct from './pages/EditProduct';
 import CartPage from './pages/CartPage';
+import ProductPage from './pages/ProductPage';
 import { ToastContainer } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="register" element={<Register/>} />
           <Route exact path="editProduct" element={<EditProduct/>} />
           <Route exact path="cartPage" element={<CartPage/>} />
+          <Route exact path="productPage" element={<ProductPage/>} />
         </Route>
          
         </Routes>
