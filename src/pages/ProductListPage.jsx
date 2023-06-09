@@ -1,5 +1,7 @@
 import React from 'react';
-import ProductCard from '../components/ProductCard';
+import ProductCardBox from '../components/ProductCardBox';
+
+
 
 const ProductListPage = () => {
     return (
@@ -7,7 +9,7 @@ const ProductListPage = () => {
             <div className='productPageTitle'>
                 Product Listing
             </div>
-            <ProductCard/>
+            <ProductCardBox/>
         </div>
     );
 };

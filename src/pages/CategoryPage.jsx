@@ -1,19 +1,19 @@
 import React from 'react';
 import './ProductPage.css';
-import ProductTabel from '../components/ProductTabel';
+import CategoryTabel from '../components/CategoryTabel';
 
 
 
-function ProductPage(props) {
+function CategoryPage(props) {
     return (
         <div className='productPage'>
             <div className='productPageTitle'>
-                Book Page
+                Category Page
             </div>        
-            <ProductTabel/>
+            <CategoryTabel/>
 
         </div>
     );
 }
 
-export default ProductPage;
+export default CategoryPage;

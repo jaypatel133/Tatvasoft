@@ -4,8 +4,7 @@ import './EditProduct.css';
 import {Button} from '@mui/material';
 import { toast } from "react-toastify";
 import { Formik } from 'formik';
-import { getBookById,updateBook,addBook} from '../service/book.service';
-import { getAllCategories } from '../service/category.service';
+import { getUserRole ,getUserById, updateUser} from '../service/user.service';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from "react-router-dom";
@@ -48,11 +47,11 @@ const styles = {
 
 
 
-function EditProduct(props) {
+function EditUser(props) {
     const {state} = useLocation();
     // const [fileName,SetFileName] = new useState("No file chosen..");
-    const [initValue,setInitValue] = new useState({ name: '', price: '', categoryId:'', description: '', base64image: '' })
-    const [category,setCategory] = new useState();
+    const [initValue,setInitValue] = new useState({ firstName: '', lastName: '', email:'', roleId: '' ,password: ''})
+    const [role,setRole] = new useState();
     const navigate = useNavigate()
 
 
@@ -62,28 +61,27 @@ function EditProduct(props) {
     const handleClick = event => {
         hiddenFileInput.current.click();
     };
-    
+
     useEffect(()=>{
-        console.log()
         if(state?.id)
         {
-            getBookById(state.id).then((res)=>{
+            getUserById(state.id).then((res)=>{
                 const data = res
-                setInitValue({ id:data.id ,name: data.name, price: data.price, categoryId: data.categoryId, description: data.description, base64image: data.base64image })
+                setInitValue({ id:state.id ,firstName: data.firstName, lastName: data.lastName, email: data.email, roleId: data.roleId ,role: data.role ,password:data.password })
             })
         }
-        getAllCategories().then((res)=>{
-            setCategory(res.map(obj => {
+        getUserRole().then((res)=>{
+            setRole(res.map(obj => {
                 return <MenuItem value={obj.id}>{obj.name}</MenuItem>
             }))
         })
     },[])
 
-
     return (
         <div className='editProduct'>
             <div className='editProductTitle'>
-            {state?.id ? "Edit Product" : "Add Product"}
+            {state?.id ? "Edit User" : "Add User"}
+
             </div>
             {<Formik
                         initialValues={initValue}
@@ -102,18 +100,19 @@ function EditProduct(props) {
                         }}
                         onSubmit={(values, { setSubmitting }) => {
                             if(state?.id){
-                                updateBook(values).then((res)=>{
-                                toast.success("book data is updated");
+
+                                updateUser(values).then((res)=>{
+                                toast.success("user data is updated");
                                 })
                             }
                             else
                             {
-                                addBook(values)
-                                .then((res)=>{
-                                        toast.success("book data is Added");
-                                    })
+                                // addBook(values)
+                                // .then((res)=>{
+                                //         toast.success("book data is Added");
+                                //     })
                             }
-                            navigate('/productPage')
+                            // navigate('/productPage')
                         }}
                         >
                         {({
@@ -128,82 +127,68 @@ function EditProduct(props) {
                             /* and other goodies */
                         }) => (
                             <form onSubmit={handleSubmit}>
-                                {console.log(values)}
+                                
 
                                 <div style={{width:"49%",height:"80px",display:"inline-block"}}>
-                                        <samp className='inpTitle'>Book Name *</samp>
+                                        <samp className='inpTitle'>First Name *</samp>
                                         <input 
                                         
                                         type="text"
-                                        name="name"
+                                        name="firstName"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        value={values.name}
+                                        value={values.firstName}
                                         
-                                        className='inpBox' placeholder='ProductName'/>
+                                        className='inpBox' placeholder='First Name'/>
                                 </div>
                                 <div style={{width:"49%",height:"80px",display:"inline-block",marginLeft:"2%"}}>
-                                        <samp className='inpTitle'>Book Price (RS)*</samp>
+                                        <samp className='inpTitle'>Last Name *</samp>
                                         <input 
-                                        type="number"
-                                        name="price"
+                                        type="text"
+                                        name="lastName"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        value={values.price}
-                                        className='inpBox' placeholder='price'/>
+                                        value={values.lastName}
+                                        className='inpBox' placeholder='Last Name'/>
                                 </div>
                                 <samp style={{display:"block",height:"35px"}}/>
                                 <div style={{width:"49%",height:"80px",display:"inline-block"}}>
-                                        <samp className='inpTitle'>Category *</samp>
-                                        {/* <input 
+                                        <samp className='inpTitle'>Email *</samp>
+                                        <input 
+                                        
                                         type="text"
-                                        name="categoryId"
+                                        name="email"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        value={values.categoryId}
-                                        className='inpBox' placeholder='category'/> */}
+                                        value={values.email}
+                                        
+                                        className='inpBox' placeholder='Email'/>
+                                </div>
+                                <div style={{width:"49%",height:"80px",display:"inline-block",marginLeft:"2%"}}>
+                                        <samp className='inpTitle'>Role *</samp>
 
                                         <Select 
-                                            name="categoryId"
+                                            name="roleId"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            value={values.categoryId}
+                                            value={values.roleId}
                                             sx={styles.select}>
-                                            {category}
+                                            {role}
                                         </Select>
                                 </div>
-                                <div style={{width:"49%",height:"80px",display:"inline-block",marginLeft:"2%"}}>
-                                        <samp className='inpTitle'>Description *</samp>
+
+                                <samp style={{display:"block",height:"35px"}}/>
+                                <div style={{width:"49%",height:"80px",display:"inline-block"}}>
+                                        <samp className='inpTitle'>Password *</samp>
                                         <input 
+                                        
                                         type="text"
-                                        name="description"
+                                        name="password"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        value={values.description}
-                                        className='inpBox' placeholder='description'/>
-                                </div>
-                                <samp style={{display:"block",height:"35px"}}/>
-
-                                <div className="file-upload">
-                                    <div className="file-upload-select">
-                                    {values.base64image === '' ? <div styles={{display:"none"}}> <div className="file-select-button">upload</div>
-                                      <div className="file-select-name" onClick={handleClick} style={{display:"inline-block",width:"90%"}}> No file chosen...</div></div> : <><img src={values.base64image} width={"40px"} height={"40px"}/> <samp style={{position:"absolute",fontSize:"20px", marginTop:"3px",marginLeft:"20px"}} onClick={()=>{setFieldValue("base64image", '')}}>X</samp></>}
-                                        <input 
-                                        type="file" 
-                                        name="base64image"
-                                        onBlur={handleBlur}
-                                        onChange={(event) => {
-                                                let reader = new FileReader();
-                                                reader.readAsDataURL(event.currentTarget.files[0]);
-                                                reader.onload = function () {
-                                                    setFieldValue("base64image", reader.result);
-                                                };
-                                                reader.onerror = function (error) {
-                                                    console.log('Error: ', error);
-                                                };
-                                        }}
-                                        itemID="file-upload-input" ref={hiddenFileInput} style={{display: 'none'}}/>
-                                    </div>
+                                        value={values.password}
+                                        
+                                        className='inpBox' placeholder='Email'/>
                                 </div>
 
                                 <samp style={{display:"block",height:"35px"}}/>
@@ -220,4 +205,4 @@ function EditProduct(props) {
     );
 }
 
-export default EditProduct;
+export default EditUser;

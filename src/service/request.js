@@ -10,7 +10,8 @@ const request = axios.create({
 
    request.interceptors.response.use(
      function (response) {  
-          return response
+      console.log(response)
+        return Promise.resolve(response.data.result);
      }, 
      function (error) {
           return Promise.reject(error);

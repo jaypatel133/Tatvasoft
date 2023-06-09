@@ -8,11 +8,10 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Button} from '@mui/material';
-import {GetPaginatedListBook} from '../service/book.service';
+import { GetPaginatedCategory,DeleteCategory } from '../service/category.service';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
 import ConfirmationDialog from './ConfirmationDialog';
-import { deleteBook } from '../service/book.service';
 import { toast } from 'react-toastify';
 
 
@@ -20,20 +19,6 @@ import { toast } from 'react-toastify';
 const columns = [
   { id: 'id', label: 'Id', minWidth: 100 },
   { id: 'name', label: 'Name', minWidth: 100 },
-  {
-    id: 'category',
-    label: 'Category',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'price',
-    label: 'price',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
   {
     id: 'button',
     label: '',
@@ -61,8 +46,7 @@ const styles = {
       
 };
 
-
-export default function ProductTabel() {
+export default function CategoryTabel() {
   const [page, setPage] = React.useState(0);
   const [open, setOpen] = React.useState(0);
   const [selectedId, setSelectedId] = React.useState(0);
@@ -82,7 +66,7 @@ export default function ProductTabel() {
             payload += '&keyword='+search
             setPage(0)
         }
-    GetPaginatedListBook(payload).then((res)=>{
+    GetPaginatedCategory(payload).then((res)=>{
       console.log(res)
       setTotalRows(res.totalItems)
       setRows(res.items)
@@ -101,8 +85,8 @@ export default function ProductTabel() {
   };
 
   const onConfirmDelete = () => {
-    deleteBook(selectedId).then((res)=>{
-      toast.success("book deleted")
+    DeleteCategory(selectedId).then((res)=>{
+      toast.success("Category deleted")
       setOpen(false)
     })
 }
@@ -112,8 +96,8 @@ export default function ProductTabel() {
       <div className='productPageSearchBar'>
         <TextField sx={styles.input} size='small' placeholder='search' onChange={(event)=>{setSearch(event.target.value)}}/>
         <Button sx={styles.can_b} variant="contained" onClick={()=>{
-          navigate('/editProduct')
-          }}>Add Book</Button>
+          navigate('/editCategory')
+          }}>Add Category</Button>
       </div>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -166,8 +150,8 @@ export default function ProductTabel() {
           open={open}
           onClose={() => setOpen(false)}
           onConfirm={() => onConfirmDelete()}
-          title="Delete book"
-          description="Are you sure you want to delete this book?"
+          title="Delete User"
+          description="Are you sure you want to delete this Category?"
         />
     </Paper>
   );
@@ -205,8 +189,7 @@ function ProducButton(props){
       
     return(
         <div>
-        
-            <Button sx={styles.sea_b} variant="outlined" className='nav_b' onClick={()=>{navigate("/editProduct",{ state: { id: props.id} })}}>Edit</Button>
+            <Button sx={styles.sea_b} variant="outlined" className='nav_b' onClick={()=>{navigate("/editCategory",{ state: { id: props.id} })}}>Edit</Button>
             <Button sx={styles.can_b} variant="outlined" className='nav_b' onClick={()=>{props.setOpen(true); props.setSelectedId(props.id)}}>delete </Button>
         </div>
     );

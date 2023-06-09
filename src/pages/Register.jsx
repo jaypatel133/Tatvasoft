@@ -41,7 +41,7 @@ function Register(props) {
     
     useEffect(()=>{
         getUserRole().then(res=>{
-            setRoles(res.data.result.map(obj => {
+            setRoles(res.map(obj => {
                 return <MenuItem value={obj.id}>{obj.name}</MenuItem>
             }))
         }).catch((err)=>{
@@ -101,11 +101,9 @@ function Register(props) {
                             const temp = JSON.parse(JSON.stringify(formValues));
                             delete temp.conPassword;
                             addUser(temp).then(res=>{
-                                if(res?.data?.code === 200){
                                     toast.success("Register Successful")
                                     navigate('/login');
                                     console.log(res);
-                                }
                             })
                         }}
                         >

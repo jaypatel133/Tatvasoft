@@ -1,11 +1,11 @@
-import React from 'react';
+import React  from 'react';
 import { Formik } from 'formik';
 import './Login.css';
 import {Button} from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import {LoginUser} from '../service/auth.service';
 import { toast } from "react-toastify";
-
+import { useUpdateAuth } from '../Context/authContext';
 
 
 const styles = {
@@ -22,6 +22,7 @@ const styles = {
   };
 
 function Login(props) {
+    const {login} = useUpdateAuth()
     const navigate = useNavigate();
     return (
         <div>
@@ -69,11 +70,11 @@ function Login(props) {
                         }}
                         onSubmit={(values, { setSubmitting }) => {
                             LoginUser(values).then(res=>{
-                                if(res?.data?.code === 200)
-                                {
+                                // if(res?.data?.code === 200)
+                                // {
                                     toast.success("Login Successful")
-                                    console.log(res);
-                                } 
+                                    login(res)
+                                // } 
                             })
 
                         }}
