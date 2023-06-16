@@ -49,7 +49,6 @@ const styles = {
 
 function EditUser(props) {
     const {state} = useLocation();
-    // const [fileName,SetFileName] = new useState("No file chosen..");
     const [initValue,setInitValue] = new useState({ firstName: '', lastName: '', email:'', roleId: '' ,password: ''})
     const [role,setRole] = new useState();
     const navigate = useNavigate()

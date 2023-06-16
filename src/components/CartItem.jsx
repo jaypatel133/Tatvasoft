@@ -5,7 +5,10 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import TextField from '@mui/material/TextField';
 import { Formik } from 'formik';
-import { useUpdateCart } from '../Context/cartContext';
+import { useDispatch } from 'react-redux';
+import {updateCartDetail} from '../store/Slice/cartSlice';
+import {deleteCartItemRTK} from '../store/Slice/cartSlice';
+
 
 
 const styles = {
@@ -32,10 +35,12 @@ const styles = {
 
 function CartItem(props) {
     const [quantity,setQuantity] = new useState(props.quantity);
-    const {updateCart,removeFromCart} = useUpdateCart();
+    const dispatch = useDispatch()
+
 
     useEffect(()=>{
-        updateCart({id:props.id,bookId:props.bookId,quantity:quantity})
+       
+        dispatch( updateCartDetail({id:props.id,bookId:props.bookId,quantity:quantity}))
     },[quantity])
     return (
         <div className='CartItem'>
@@ -73,57 +78,8 @@ function CartItem(props) {
                         <RemoveIcon/>
                     </div>
                     <samp style={{textAlign:"right",marginLeft:"465px",color:"#f14d54"}} onClick={()=>{
-                        removeFromCart(props.id)
+                        dispatch(deleteCartItemRTK(props.id))
                     }}>Remove</samp>
-
-
-
-
-
-
-
-                    {/* <Formik
-                        initialValues={{id:props.id,quantity:props.quantity}}
-                        enableReinitialize={true}
-                        validate={values => {
-                            const errors = {};
-                            // if (!values.email) {
-                            // errors.email = 'Email Required';
-                            // } else if (
-                            // !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                            // ) {
-                            // errors.email = 'Invalid email address';
-                            // }
-
-                            return errors;
-                        }}
-                        onSubmit={(values, { setSubmitting }) => {
-                         
-                        }}
-                        >
-                        {({
-                            values,
-                            errors,
-                            touched,
-                            handleChange,
-                            handleBlur,
-                            handleSubmit,
-                            setFieldValue,
-                            isSubmitting,
-
-                        }) => (
-                            <form onSubmit={handleSubmit}>
-                                
-                            </form>
-                        )}
-                        </Formik> */}
-
-
-
-
-
-
-
 
                 </div>
                 <div style={{display:"inline-block",width:'600px',height:"30px"}}></div>
