@@ -2,9 +2,13 @@ import React, { useEffect ,useState} from 'react';
 import './CartPage.css'
 import CartItem from '../components/CartItem';
 import { useCart } from '../Context/cartContext';
+import { useSelector } from 'react-redux';
+
 
 function CartPage(props) {
-    const cart = useCart();
+    // const cart = useCart();
+    const cart = useSelector((state) => state.cart.cartList)
+
     const [cartItems,setCartItems] = new useState()
     const [total,setTotal] = new useState(0);
 

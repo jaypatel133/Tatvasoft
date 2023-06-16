@@ -4,8 +4,12 @@ import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 import SearchBar from './SearchBar';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useAuth,useUpdateAuth } from '../Context/authContext';
 import { useCart } from '../Context/cartContext';
+import { logoutUsingRTK } from '../store/Slice/userSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import {fetchCartDetail} from '../store/Slice/cartSlice';
+
+
 
 
 const styles = {
@@ -29,9 +33,11 @@ const styles = {
 
 function Header(props) {
     const navigate = useNavigate();
-    const user = useAuth()
-    const {logout} = useUpdateAuth();
-    const cart = useCart();
+    const user = useSelector((state) => state.user.userDetail)
+    const cart = useSelector((state) => state.cart.cartList)
+    const dispatch = useDispatch()
+
+    // const cart = useCart();
     const [total,setTotal] = new useState(0);
 
     useEffect(()=>{
@@ -42,6 +48,13 @@ function Header(props) {
     },[cart])
 
 
+    useEffect(()=>{
+        if(user)
+        {
+            dispatch(fetchCartDetail())
+        }
+    },[])
+   
 
 
 
@@ -53,7 +66,7 @@ function Header(props) {
                     src={process.env.PUBLIC_URL + "logo.png"} />
                 </div>
                 <div>    
-                    {user == null ? 
+                    {user === null ? 
                     <>
                         <li style={{listStyle:"none",display:"inline"}} className='nav_b'><Button sx={styles.nav_a} variant="secondary" className='nav_b' size="small" onClick={()=>{navigate("/login")}}>Login</Button></li>
                         <li style={{listStyle:"none",display:"inline"}}>|</li>
@@ -61,12 +74,13 @@ function Header(props) {
                     </>
                     :
                     <>
-                        <li style={{listStyle:"none",display:"inline"}} className='nav_b'><Button sx={styles.nav_a} variant="secondary" className='nav_b' size="small" onClick={()=>logout()}>Logout</Button></li>
+                        <li style={{listStyle:"none",display:"inline"}} className='nav_b'><Button sx={styles.nav_a} variant="secondary" className='nav_b' size="small" onClick={()=>{dispatch(logoutUsingRTK())}}>Logout</Button></li>
                         <li style={{listStyle:"none",display:"inline"}}>|</li>
                         <li style={{listStyle:"none",display:"inline"}} className='nav_b'><Button sx={styles.nav_a} variant="secondary" className='nav_b' size="small" onClick={()=>{navigate("/productListPage")}}>ProductList</Button></li>
+                        <li style={{listStyle:"none",display:"inline"}} className='nav_b'><Button sx={styles.nav_b} variant="outlined" className='nav_b' size="small" onClick={()=>{navigate("/cartPage")}}><ShoppingCartIcon style={{color:'red'}} size="small"/> {total} Card</Button></li>
+
                     </>
                     }
-                    <li style={{listStyle:"none",display:"inline"}} className='nav_b'><Button sx={styles.nav_b} variant="outlined" className='nav_b' size="small" onClick={()=>{navigate("/cartPage")}}><ShoppingCartIcon style={{color:'red'}} size="small"/> {total} Card</Button></li>
                 </div>
             </ul>
             <SearchBar/>

@@ -5,7 +5,8 @@ import {Button} from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import {LoginUser} from '../service/auth.service';
 import { toast } from "react-toastify";
-import { useUpdateAuth } from '../Context/authContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginUsingRTK } from '../store/Slice/userSlice';
 
 
 const styles = {
@@ -22,8 +23,13 @@ const styles = {
   };
 
 function Login(props) {
-    const {login} = useUpdateAuth()
     const navigate = useNavigate();
+
+
+    // const userDetail = useSelector((state) => state.user.userDetail)
+    const dispatch = useDispatch()
+
+
     return (
         <div>
             <div className='redir'>
@@ -73,7 +79,8 @@ function Login(props) {
                                 // if(res?.data?.code === 200)
                                 // {
                                     toast.success("Login Successful")
-                                    login(res)
+                                    // login(res)
+                                    dispatch(loginUsingRTK(res));
                                 // } 
                             })
 

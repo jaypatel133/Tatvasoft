@@ -1,6 +1,7 @@
 import React,{useContext,useEffect,useState}  from "react";
 import { getAllCartItem,addCartItem,updateCartItem,DeleteCategory } from "../service/cart.service";
-import { useAuth } from "./authContext";
+import { useSelector} from 'react-redux';
+
 
 const CartContext = React.createContext();
 const CartUpdateContext = React.createContext();
@@ -16,14 +17,15 @@ export function useUpdateCart(){
 
 export function CartProvider({children})
 {
-    const user = useAuth()
+    const userDetail = useSelector((state) => state.user.userDetail)
+
 
     const [cart,SetCart] = useState('');
 
     function addToCart(data) {
         let payload ={
             "bookId": data.bookId,
-            "userId": user.id,
+            "userId": userDetail.id,
             "quantity": data.quantity
         }
         addCartItem(payload).then((res)=>{
@@ -35,7 +37,7 @@ export function CartProvider({children})
         let payload ={
             "id":data.id,
             "bookId": data.bookId,
-            "userId": user.id,
+            "userId": userDetail.id,
             "quantity": data.quantity
         }
         updateCartItem(payload).then((res)=>{
@@ -52,10 +54,12 @@ export function CartProvider({children})
     }
 
     function setcartItem(){
-        getAllCartItem(user.id).then((res)=>{
-            SetCart(res)
-            console.log('Cart: ',res)
-        })
+        if(userDetail?.id){
+            getAllCartItem(userDetail.id).then((res)=>{
+                SetCart(res)
+            })
+        }
+            // console.log('Cart: ',res)
     }
 
     useEffect(()=>{

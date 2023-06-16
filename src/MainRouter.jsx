@@ -11,12 +11,13 @@ import ProductListPage from './pages/ProductListPage';
 import UserPage from './pages/UserPage';
 import EditUser from './pages/EditUser';
 import EditCategory from './pages/EditCategory'
-// import Home from './pages/Home';
-import { useAuth } from './Context/authContext';
+import { useSelector} from 'react-redux';
+
 
 
 function MainRouter(props) {
-    const user = useAuth()
+    const user = useSelector((state) => state.user.userDetail)
+
     return (
         <Routes>
             <Route exact path="/" element={<MainPage/>} >

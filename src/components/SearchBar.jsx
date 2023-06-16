@@ -5,7 +5,9 @@ import './SearchBar.css'
 import useAutocomplete from '@mui/base/useAutocomplete';
 import { styled } from '@mui/system';
 import {getAllBook} from '../service/book.service';
-import { useUpdateCart } from '../Context/cartContext';
+import {useDispatch } from 'react-redux';
+import {addToCartRTK} from '../store/Slice/cartSlice';
+
 // import {searchBook} from '../service/book.service';
 
 
@@ -49,8 +51,9 @@ const styles = {
 
 
 function SearchBar(props) {
-  const {addToCart} = useUpdateCart();
   const [books,setBooks] = useState([]);
+  const dispatch = useDispatch()
+
   
   useEffect(()=>{
     getAllBook().then(res=>{
@@ -105,7 +108,7 @@ function SearchBar(props) {
                       {option.description.length > 45 ? option.description.slice(0,43)+'...' : option.description }
                       </div>
                       <div style={{display:"inline-block",textAlign:"right",width:"25%",fontSize:"15px",fontWeight:"300",color:"#f14d54"}}
-                      onClick={()=>{addToCart({bookId: option.id,quantity:1})}}
+                      onClick={()=>{dispatch(addToCartRTK({bookId: option.id,quantity:1}))}}
                       >Add to cart</div>
                     </div>
                     {/* <li  style={{display:"block",width:"300px",fontSize:"14px",fontWeight:"300",color:"gray"}}>Description</li> */}

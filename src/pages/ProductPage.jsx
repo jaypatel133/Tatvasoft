@@ -3,8 +3,8 @@ import './ProductPage.css';
 import ProductTabel from '../components/ProductTabel';
 
 
-
 function ProductPage(props) {
+    
     return (
         <div className='productPage'>
             <div className='productPageTitle'>

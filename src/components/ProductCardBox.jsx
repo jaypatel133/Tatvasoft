@@ -59,7 +59,7 @@ const ProductCardBox = () => {
             payload += '&keyword='+search
         }
         GetPaginatedListBook(payload).then((res)=>{
-            console.log(res);
+            // console.log(res);
             setPageCount(res.totalPages)
             const item = res
             if(sorting !== 0)
@@ -83,7 +83,7 @@ const ProductCardBox = () => {
                 }
             }
             setPageItems(res.items.map((item)=>{
-                return <ProductCardItem id={item.id} img={item.base64image} category={item.category} name={item.name} price={item.price} description={item.description}/>
+                return <ProductCardItem key={item.id} id={item.id} img={item.base64image} category={item.category} name={item.name} price={item.price} description={item.description}/>
             }))
         })
     },[page,search,sorting])
